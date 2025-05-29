@@ -1,0 +1,38 @@
+import pyxel
+
+class Jeu:
+    def __init__(self):
+        pyxel.init(160, 120)  
+        pyxel.load("2.pyxres") 
+        self.x = 0
+        self.y = 0
+        pyxel.run(self.update, self.draw)
+
+    def update(self):
+        if pyxel.btn(pyxel.KEY_RIGHT):
+            if self.x < 160-14:
+                self.x += 1
+        if pyxel.btn(pyxel.KEY_LEFT):
+            if self.x > 0:
+                self.x -= 1
+        if pyxel.btn(pyxel.KEY_DOWN):
+            if self.y < 100-16:
+                self.y += 1
+        if pyxel.btn(pyxel.KEY_UP):
+            if self.y > 0:
+                self.y -= 1
+        if pyxel.btn(pyxel.KEY_ESCAPE):
+            pyxel.quit()
+
+    def draw(self):
+        pyxel.cls(0)
+        pyxel.bltm(0, 0, 0, 0, 128, 160, 120)
+        pyxel.blt(self.x, self.y, 0, 17, 16, 14, 16, 2)
+
+    def gravite(self):
+        if pyxel.btn(pyxel.KEY_UP):
+            for i in range(10): 
+                self.y -= 1 
+            for i in range(5):
+                self.y += 2
+Jeu()
